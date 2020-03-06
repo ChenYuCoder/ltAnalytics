@@ -1,0 +1,1 @@
+java -jar lt.analytics-1.0.jar

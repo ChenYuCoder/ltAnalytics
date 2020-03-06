@@ -1,0 +1,41 @@
+server:
+  port: 8080
+analytics:
+# 需要统计的省分
+  analyticsProvince:
+    - 内蒙华为
+    - 内蒙烽火
+# 需要统计的app_id
+  recommendIdList:
+    - V96596cn00807155
+    - V96596cn00807154
+    - V96596cn00820630
+    - V96596cn00807158
+    - V96596cn00807157
+    - V96596cn00807156
+    - V96596cn00862355
+    - V96596cn00862356
+    - V96596cn00829981
+    - V96596cn00887304
+    - GQHYtbdhGZ03
+    - nmggqVIP
+    - haolaiwuVIP
+    - JPRJzzb
+    - GQHYzy
+    - wojiashaoerVIP
+    - wojiadongmanVIP
+    - jlvip
+    - nmgfhgqVIP
+# 需要统计的触发项
+  triggerList:
+    - DUI430
+# 华为内部订购标识（内蒙华为专属）
+  huaweiInsideRecommendList:
+    - nmghyyby@208
+# 常规内容appId前缀标识
+  conventionIdPrefix: V
+
+logging:
+  file:
+    path: ./log
+
