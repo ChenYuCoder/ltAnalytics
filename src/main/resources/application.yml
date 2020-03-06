@@ -7,25 +7,7 @@ analytics:
     - 内蒙烽火
 # 需要统计的app_id
   recommendIdList:
-    - V96596cn00807155
-    - V96596cn00807154
-    - V96596cn00820630
-    - V96596cn00807158
-    - V96596cn00807157
-    - V96596cn00807156
-    - V96596cn00862355
-    - V96596cn00862356
-    - V96596cn00829981
-    - V96596cn00887304
-    - GQHYtbdhGZ03
-    - nmggqVIP
-    - haolaiwuVIP
-    - JPRJzzb
-    - GQHYzy
-    - wojiashaoerVIP
-    - wojiadongmanVIP
-    - jlvip
-    - nmgfhgqVIP
+    - 1
 # 需要统计的触发项
   triggerList:
     - DUI430
