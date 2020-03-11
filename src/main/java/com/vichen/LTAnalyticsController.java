@@ -102,7 +102,7 @@ public class LTAnalyticsController {
 
                 String channel = jsonItem.getString("频道");
 
-                if (channel == null) {
+                if (channel == null || channel.equals("0.0")) {
                     JSONObject triggerResult = provinceResult.getJSONObject("空频道");
 
                     if (triggerResult == null) {
