@@ -1,5 +1,6 @@
 package com.vichen;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -29,6 +32,19 @@ public class LTAnalyticsController {
 
     @GetMapping("a")
     public String analytics(String path) {
+        File file = new File(path);
+        if (file.isDirectory()) {
+            JSONArray jsonArray = new JSONArray();
+            for (File listFile : Objects.requireNonNull(file.listFiles())) {
+                jsonArray.add(analyticsFile(listFile.getAbsolutePath()));
+            }
+            return jsonArray.toJSONString();
+        }
+
+        return analyticsFile(path).toString();
+    }
+
+    public Object analyticsFile(String path) {
         JSONArray data;
         try {
             data = read(path);
@@ -36,7 +52,7 @@ public class LTAnalyticsController {
             return e.getMessage();
         }
 
-        return analyticsData(data).toJSONString();
+        return analyticsData(data);
     }
 
     private JSONObject analyticsData(JSONArray data) {
@@ -69,7 +85,7 @@ public class LTAnalyticsController {
 
             provinceResult.put("总订购", provinceResult.getIntValue("总订购") + 1);
 
-            if ("内蒙华为".equals(province)) {
+            if ("内蒙华为".equals(province) || "福建".equals(province)) {
                 if (bbConfig.getHuaweiInsideRecommendList().contains(jsonItem.getString("产品ID"))) {
                     provinceResult.put("内部订购", provinceResult.getIntValue("内部订购") + 1);
                 } else {
@@ -96,7 +112,7 @@ public class LTAnalyticsController {
             if (appId != null && appId.startsWith(bbConfig.getConventionIdPrefix())) {
 //                provinceResult.put("常规内容", provinceResult.getIntValue("常规内容") + 1);
 
-                if (StringUtils.isEmpty(jsonItem.getString("触发项"))) {
+                if (StringUtils.isEmpty(triggerValue) || triggerValue.equals("0.0")) {
                     provinceResult.put("常规内容触发项空", provinceResult.getIntValue("常规内容触发项空") + 1);
                 }
 
@@ -129,6 +145,7 @@ public class LTAnalyticsController {
      */
 
     private JSONArray read(String path) throws Exception {
+
         JSONArray data = new JSONArray();
         try (InputStream fis = new FileInputStream(path)) {
             Workbook workbook = null;

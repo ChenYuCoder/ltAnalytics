@@ -1,23 +1,81 @@
 server:
   port: 8080
 analytics:
-# 需要统计的省分
+  # 需要统计的省分
   analyticsProvince:
     - 内蒙华为
     - 内蒙烽火
-# 需要统计的app_id
+    - 福建
+    - 龙江
+  # 需要统计的app_id
   recommendIdList:
-    - 1
-# 需要统计的触发项
+    - V96596cn00807155
+    - V96596cn00807154
+    - V96596cn00820630
+    - V96596cn00807158
+    - V96596cn00807157
+    - V96596cn00807156
+    - V96596cn00862355
+    - V96596cn00862356
+    - V96596cn00829981
+    - V96596cn00887304
+    - GQHYtbdhGZ03
+    - nmggqVIP
+    - haolaiwuVIP
+    - JPRJzzb
+    - GQHYzy
+    - wojiashaoerVIP
+    - wojiadongmanVIP
+    - jlvip
+    - nmgfhgqVIP
+    - JXrbllk
+    - GQHYyxtjFJ
+    - DYSFjcdplzkFJ
+    - V96596cn20190711
+    - Fjsejctj/FJdmrbtj
+    - zyldgztbfj
+    - FJXQYanchuGQHY
+    - FJLMtanchuGQHY
+    - DUItuichuwanliuFJ
+    - GQHYgrzxFJ
+    - GQHYtbdhGZ031
+    - fjgqVIP
+    - haolaiwuVIP
+    - JPRJzzb
+    - GQHYzy
+    - wojiashaoerVIP
+    - wojiadongmanVIP
+    - jlvip
+    - JXrbllkHLJ
+    - GQHYyxtjHLJ
+    - DYSFjcdplzkHLJ
+    - DSJdgztbHLJ
+    - HLJsejctj
+    - zyldgztbhlj
+    - HLJXQYanchuGQHY
+    - HLJLMtanchuGQHY
+    - DUItuichuwanliuHLJ
+    - GQHYgrzxHLJ
+    - GQHYtbdhGZ03HLJ
+    - gqVIP211
+    - hljgqVIP
+    - heolongjianggqVIP
+    - haolaiwuVIP
+    - JPRJzzb
+    - GQHYzy
+    - wojiashaoerVIP
+    - jlvip
+  # 需要统计的触发项
   triggerList:
     - DUI430
-# 华为内部订购标识（内蒙华为专属）
+  # 内部订购标识
   huaweiInsideRecommendList:
     - nmghyyby@208
-# 常规内容appId前缀标识
+    - gqVIPnb@214
+    - gqViphyyb@214
+  # 常规内容appId前缀标识
   conventionIdPrefix: V
 
 logging:
   file:
     path: ./log
-
