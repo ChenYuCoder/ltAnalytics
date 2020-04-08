@@ -34,11 +34,11 @@ public class LTAnalyticsController {
     public String analytics(String path) {
         File file = new File(path);
         if (file.isDirectory()) {
-            JSONArray jsonArray = new JSONArray();
+            JSONObject result = new JSONObject();
             for (File listFile : Objects.requireNonNull(file.listFiles())) {
-                jsonArray.add(analyticsFile(listFile.getAbsolutePath()));
+                result.put(listFile.getName(), analyticsFile(listFile.getAbsolutePath()));
             }
-            return jsonArray.toJSONString();
+            return result.toJSONString();
         }
 
         return analyticsFile(path).toString();
