@@ -88,54 +88,78 @@ public class LTAnalyticsController {
             if ("内蒙华为".equals(province) || "福建".equals(province)) {
                 if (bbConfig.getHuaweiInsideRecommendList().contains(jsonItem.getString("产品ID"))) {
                     provinceResult.put("内部订购", provinceResult.getIntValue("内部订购") + 1);
+                    doSomething(provinceResult, jsonItem, 1);
                 } else {
                     provinceResult.put("活动页", provinceResult.getIntValue("活动页") + 1);
+                    doSomething(provinceResult, jsonItem, 2);
                 }
+            } else {
+                doSomething(provinceResult, jsonItem, 0);
             }
-
-
-            String appId = jsonItem.getString("APP_ID");
-            if (bbConfig.getRecommendIdList().contains(appId)) {
-                JSONObject appIdResult = provinceResult.getJSONObject("appId");
-                if (appIdResult == null) {
-                    appIdResult = new JSONObject();
-                    provinceResult.put("appId", appIdResult);
-                }
-                appIdResult.put(appId, appIdResult.getIntValue(appId) + 1);
-            }
-
-            String triggerValue = jsonItem.getString("触发项");
-            if (bbConfig.getTriggerList().contains(triggerValue)) {
-                provinceResult.put(triggerValue, provinceResult.getIntValue(triggerValue) + 1);
-            }
-
-            if (appId != null && appId.startsWith(bbConfig.getConventionIdPrefix())) {
-//                provinceResult.put("常规内容", provinceResult.getIntValue("常规内容") + 1);
-
-                if (StringUtils.isEmpty(triggerValue) || triggerValue.equals("0.0")) {
-                    provinceResult.put("常规内容触发项空", provinceResult.getIntValue("常规内容触发项空") + 1);
-                }
-
-                String channel = jsonItem.getString("频道");
-
-                if (channel == null || channel.equals("0.0")) {
-                    JSONObject triggerResult = provinceResult.getJSONObject("空频道");
-
-                    if (triggerResult == null) {
-                        triggerResult = new JSONObject();
-                        provinceResult.put("空频道", triggerResult);
-                    }
-                    triggerResult.put(triggerValue, triggerResult.getIntValue(triggerValue) + 1);
-                } else {
-                    provinceResult.put(channel, provinceResult.getIntValue(channel) + 1);
-                }
-
-            }
-
 
         }
 
         return result;
+    }
+
+    private void doSomething(JSONObject provinceResult, JSONObject jsonItem, int type) {
+
+        String typeStr;
+        switch (type) {
+            case 1:
+                typeStr = "内部订购详情";
+                break;
+            case 2:
+                typeStr = "外部订购详情";
+                break;
+            default:
+                typeStr = "订购详情";
+                break;
+        }
+        JSONObject buyDetail;
+        if (provinceResult.containsKey(typeStr)) {
+            buyDetail = provinceResult.getJSONObject(typeStr);
+        } else {
+            buyDetail = new JSONObject();
+            provinceResult.put(typeStr, buyDetail);
+        }
+        String appId = jsonItem.getString("APP_ID");
+        if (bbConfig.getRecommendIdList().contains(appId)) {
+            JSONObject appIdResult = buyDetail.getJSONObject("appId");
+            if (appIdResult == null) {
+                appIdResult = new JSONObject();
+                buyDetail.put("appId", appIdResult);
+            }
+            appIdResult.put(appId, appIdResult.getIntValue(appId) + 1);
+        }
+
+        String triggerValue = jsonItem.getString("触发项");
+        if (bbConfig.getTriggerList().contains(triggerValue)) {
+            provinceResult.put(triggerValue, provinceResult.getIntValue(triggerValue) + 1);
+        }
+
+        if (appId != null && appId.startsWith(bbConfig.getConventionIdPrefix())) {
+//                provinceResult.put("常规内容", provinceResult.getIntValue("常规内容") + 1);
+
+            if (StringUtils.isEmpty(triggerValue) || triggerValue.equals("0.0")) {
+                buyDetail.put("常规内容触发项空", buyDetail.getIntValue("常规内容触发项空") + 1);
+            }
+
+            String channel = jsonItem.getString("频道");
+
+            if (channel == null || channel.equals("0.0")) {
+                JSONObject triggerResult = buyDetail.getJSONObject("空频道");
+
+                if (triggerResult == null) {
+                    triggerResult = new JSONObject();
+                    buyDetail.put("空频道", triggerResult);
+                }
+                triggerResult.put(triggerValue, triggerResult.getIntValue(triggerValue) + 1);
+            } else {
+                buyDetail.put(channel, buyDetail.getIntValue(channel) + 1);
+            }
+
+        }
     }
 
     /**
