@@ -1,1 +1,1 @@
-.\jre1.8.0_221\bin\java.exe -jar lt.analytics-1.3.jar
+.\jre1.8.0_221\bin\java.exe -jar lt.analytics-1.5.jar

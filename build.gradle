@@ -3,7 +3,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 group 'com.vichen'
-version '1.3'
+version '1.5'
 
 sourceCompatibility = 1.8
 

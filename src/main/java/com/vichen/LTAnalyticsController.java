@@ -85,7 +85,7 @@ public class LTAnalyticsController {
 
             provinceResult.put("总订购", provinceResult.getIntValue("总订购") + 1);
 
-            if ("内蒙华为".equals(province) || "福建".equals(province)) {
+            if ("内蒙华为".equals(province) || "福建".equals(province) || "龙江".equals(province)) {
                 if (bbConfig.getHuaweiInsideRecommendList().contains(jsonItem.getString("产品ID"))) {
                     provinceResult.put("内部订购", provinceResult.getIntValue("内部订购") + 1);
                     doSomething(provinceResult, jsonItem, 1);
@@ -140,16 +140,17 @@ public class LTAnalyticsController {
 
         if (appId != null && appId.startsWith(bbConfig.getConventionIdPrefix())) {
 //                provinceResult.put("常规内容", provinceResult.getIntValue("常规内容") + 1);
-
-            if (StringUtils.isEmpty(triggerValue) || triggerValue.equals("0.0")) {
+            if (triggerValue.length() < 2 && triggerValue.charAt(0) == '\u206C') {
+                triggerValue = "常规内容触发项空";
+            }
+            if (StringUtils.isEmpty(triggerValue) || triggerValue.equals("0.0") || triggerValue.equals("常规内容触发项空")) {
                 buyDetail.put("常规内容触发项空", buyDetail.getIntValue("常规内容触发项空") + 1);
             }
 
             String channel = jsonItem.getString("频道");
 
-            if (channel == null || channel.equals("0.0")) {
+            if (channel == null || channel.equals("0.0") || (channel.length() < 2 && channel.charAt(0) == '\u206C')) {
                 JSONObject triggerResult = buyDetail.getJSONObject("空频道");
-
                 if (triggerResult == null) {
                     triggerResult = new JSONObject();
                     buyDetail.put("空频道", triggerResult);

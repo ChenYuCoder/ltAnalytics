@@ -68,6 +68,8 @@ analytics:
     - V96596cn01104413
     - wojiashaoerVIPHlj
     - GQHYtbdhGZ03FJ
+    - V96596cn00887284
+    - gqVIP208
   # 需要统计的触发项
   triggerList:
     - DUI430
@@ -76,6 +78,10 @@ analytics:
     - nmghyyby@208
     - gqVIPnb@214
     - gqViphyyb@214
+    - HLJgqhyyb@211
+    - HLJgqhynb@211
+    - HLJgqhybnb@211
+    - FJgqbnb20428@214
   # 常规内容appId前缀标识
   conventionIdPrefix: V
 
