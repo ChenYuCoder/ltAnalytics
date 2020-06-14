@@ -13,6 +13,7 @@ public class LTAnalyticsConfig {
     private Set<String> huaweiInsideRecommendList;
     private String conventionIdPrefix;
     private Set<String> analyticsProvince;
+    private Set<String> smallList;
 
     public Set<String> getRecommendIdList() {
         return recommendIdList;
@@ -52,6 +53,14 @@ public class LTAnalyticsConfig {
 
     public void setAnalyticsProvince(Set<String> analyticsProvince) {
         this.analyticsProvince = analyticsProvince;
+    }
+
+    public Set<String> getSmallList() {
+        return smallList;
+    }
+
+    public void setSmallList(Set<String> smallList) {
+        this.smallList = smallList;
     }
 
     @Override

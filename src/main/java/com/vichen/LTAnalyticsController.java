@@ -98,6 +98,19 @@ public class LTAnalyticsController {
             }
 
         }
+        JSONObject smallResult = new JSONObject();
+        data.forEach(item -> {
+            JSONObject jsonItem = (JSONObject) item;
+            String id = jsonItem.getString("产品ID");
+            if ("小包".equals(jsonItem.getString("产品类型")) && bbConfig.getSmallList().contains(id)) {
+                if (!smallResult.containsKey(id)) {
+                    smallResult.put(id, 1);
+                } else {
+                    smallResult.put(id, smallResult.getIntValue(id) + 1);
+                }
+            }
+        });
+        result.put("小包订购", smallResult);
 
         return result;
     }
